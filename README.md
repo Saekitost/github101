@@ -69,5 +69,23 @@ Upstream 这个代码仓用于帮助商业训练营的同学们完成作业。
 ### 如何查看自己的分数
 
 - 系统每天北京时间早上8点自动运行计算分数
-- 每次向仓库push代码时也会触发分数计算
-- 可以通过GitHub Actions界面手动触发计算
+- 每次向仓库 push 到 main 分支时触发分数计算
+- 可在 GitHub Actions 界面手动触发计算（首次 Fork 需手动运行）
+
+#### 自动评分系统（CI）运行说明
+- 工作流文件： [.github/workflows/calculate-score.yml](.github/workflows/calculate-score.yml)
+- 触发条件：
+  - 定时：每天 08:00（北京时区，UTC 00:00）
+  - push：推送到 main 分支
+  - pull_request：向 main 分支发起或更新 PR（用于课程作业检测）
+  - 手动：在 Actions 页面使用 Run workflow
+- 课程作业检测仅在 PR 事件时执行。请通过 PR 提交作业文件：
+  - Lesson1：assignments/lesson1/{你的GitHub用户名}.md
+  - Lesson2：assignments/lesson2/{你的GitHub用户名}.md
+- 个人文章检测文件名：仓库根目录 {你的GitHub用户名}.md
+
+#### 首次 Fork 后手动运行指引
+1. 打开你 Fork 后的仓库的 GitHub 页面，点击 Actions
+2. 左侧选择 Calculate Student Score 工作流
+3. 点击 Run workflow，选择分支 main，确认运行
+4. 运行完成后在 Jobs 的日志中查看成绩报告
